@@ -3,6 +3,8 @@ package org.example.thinking.in.spring.ioc.overview.domain;
 import org.example.thinking.in.spring.ioc.overview.enums.City;
 import org.springframework.core.io.Resource;
 
+import java.util.List;
+
 public class User {
     private Long id;
 
@@ -11,6 +13,16 @@ public class User {
     private City city;
 
     private Resource configFileLocation;
+
+    private List<City> lifeCities;
+
+    public List<City> getLifeCities() {
+        return lifeCities;
+    }
+
+    public void setLifeCities(List<City> lifeCities) {
+        this.lifeCities = lifeCities;
+    }
 
     public static User createUser() {
         User user = new User();
@@ -42,16 +54,6 @@ public class User {
         this.city = city;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", city=" + city +
-                ", configFileLocation=" + configFileLocation +
-                '}';
-    }
-
     public Resource getConfigFileLocation() {
         return configFileLocation;
     }
@@ -60,4 +62,14 @@ public class User {
         this.configFileLocation = configFileLocation;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", city=" + city +
+                ", configFileLocation=" + configFileLocation +
+                ", lifeCities=" + lifeCities +
+                '}';
+    }
 }
