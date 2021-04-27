@@ -1,16 +1,18 @@
 package org.example.thinking.in.spring.dependency.injection;
 
+import org.example.thinking.in.spring.dependency.injection.annotation.InjectedUser;
+import org.example.thinking.in.spring.dependency.injection.annotation.MyAutowired;
 import org.example.thinking.in.spring.ioc.overview.domain.User;
-import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
 
 import javax.inject.Inject;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 
 /**
  * 注解驱动的依赖注入过程
@@ -34,11 +36,22 @@ public class AnnotationDependencyInjectionResolutionDemo {
     @Autowired
     private Map<String, User> users;
 
-    @Autowired
+    @MyAutowired
     private Optional<User> optionalUser;
 
     @Inject
     private User injectUser;
+
+    @InjectedUser
+    private User myInjectUser;
+
+    @Bean(name = "myBeanPostProcessor")
+    public AutowiredAnnotationBeanPostProcessor beanPostProcessor() {
+        AutowiredAnnotationBeanPostProcessor beanPostProcessor = new AutowiredAnnotationBeanPostProcessor();
+        //替换原有注解处理，使用新注解
+        beanPostProcessor.setAutowiredAnnotationType(InjectedUser.class);
+        return beanPostProcessor;
+    }
 
     public static void main(String[] args) {
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
@@ -62,6 +75,8 @@ public class AnnotationDependencyInjectionResolutionDemo {
         System.out.println("demo.optionalUser = " + demo.optionalUser);
 
         System.out.println("demo.lazyUser = " + demo.lazyUser);
+
+        System.out.println("demo.myInjectedUser = " + demo.injectUser);
 
         applicationContext.close();
     }
