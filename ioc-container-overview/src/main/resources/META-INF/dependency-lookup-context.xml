@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-        https://www.springframework.org/schema/beans/spring-beans.xsd">
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/beans/spring-context.xsd">
+
+<!--    <context:annotation-config/>-->
+
+<!--    <context:component-scan base-package="org.example"/>-->
+
     <bean id="user" class="org.example.thinking.in.spring.ioc.overview.domain.User">
         <property name="id" value="1"/>
         <property name="name" value="Constant"/>
@@ -16,7 +25,8 @@
         </property>
     </bean>
 
-    <bean id="superUser" class="org.example.thinking.in.spring.ioc.overview.domain.SuperUser" parent="user" primary="true">
+    <bean id="superUser" class="org.example.thinking.in.spring.ioc.overview.domain.SuperUser" parent="user"
+          primary="true">
         <property name="address" value="bejing"/>
     </bean>
 

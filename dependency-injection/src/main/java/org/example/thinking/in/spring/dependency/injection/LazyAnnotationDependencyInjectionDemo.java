@@ -1,15 +1,11 @@
-package org.example.thinking.in.spring.dependency.injection.annotation;
+package org.example.thinking.in.spring.dependency.injection;
 
 import org.example.thinking.in.spring.ioc.overview.domain.User;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
-import java.util.Collection;
 import java.util.Set;
 
 /**
