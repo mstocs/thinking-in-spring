@@ -1,11 +1,15 @@
 package org.example.thinking.in.spring.ioc.overview.domain;
 
 import org.example.thinking.in.spring.ioc.overview.enums.City;
+import org.springframework.beans.factory.BeanNameAware;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.io.Resource;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.util.List;
 
-public class User {
+public class User implements BeanNameAware {
     private Long id;
 
     private String name;
@@ -23,6 +27,8 @@ public class User {
     public void setLifeCities(List<City> lifeCities) {
         this.lifeCities = lifeCities;
     }
+
+    private transient String beanName;
 
     public static User createUser() {
         User user = new User();
@@ -71,5 +77,20 @@ public class User {
                 ", configFileLocation=" + configFileLocation +
                 ", lifeCities=" + lifeCities +
                 '}';
+    }
+
+    @PostConstruct
+    public void init() {
+        System.out.println("User Bean [" + beanName + "] 初始化");
+    }
+
+    @PreDestroy
+    public void destroy() {
+        System.out.println("User Bean [" + beanName + "] 销毁");
+    }
+
+    @Override
+    public void setBeanName(String name) {
+        this.beanName = name;
     }
 }
