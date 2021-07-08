@@ -1,6 +1,5 @@
 package org.example.thinking.in.spring.bean.definition;
 
-import com.sun.xml.internal.txw2.output.DumpSerializer;
 import org.example.thinking.in.spring.ioc.overview.domain.User;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
