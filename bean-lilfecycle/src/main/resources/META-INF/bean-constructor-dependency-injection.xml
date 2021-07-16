@@ -9,5 +9,8 @@
         http://www.springframework.org/schema/context
         https://www.springframework.org/schema/beans/spring-context.xsd">
 
-    <bean id="userHolder" class="org.example.thinking.in.spring.bean.lificycle.UserHolder" autowire="constructor"/>
+    <bean id="userHolder" class="org.example.thinking.in.spring.bean.lificycle.UserHolder" autowire="constructor">
+        <property name="number" value="1"/>
+        <property name="description" value="this is user holder"/>
+    </bean>
 </beans>
