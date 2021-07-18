@@ -12,20 +12,17 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @Date 2021/7/11 23:00
  * @Description 实例化生命周期示例
  **/
-public class BeanInstantiationLIfeCycleDemo {
+public class BeanInitializationLIfeCycleDemo {
     public static void main(String[] args) {
         executeBeanFactory();
-
-        System.out.println("------------------");
-
-        executeApplicationContext();
     }
 
     private static void executeBeanFactory() {
         DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
         //添加BeanPostProcessor实现
         beanFactory.addBeanPostProcessor(new MyInstantiationAwareBeanPostProcessor());
-
+        //解决@PostConstruct注解未生效
+        beanFactory.addBeanPostProcessor(new CommonAnnotationBeanPostProcessor());
         XmlBeanDefinitionReader beanDefinitionReader = new XmlBeanDefinitionReader(beanFactory);
         String location = "META-INF/dependency-lookup-context.xml";
         String location2= "META-INF/bean-constructor-dependency-injection.xml";
