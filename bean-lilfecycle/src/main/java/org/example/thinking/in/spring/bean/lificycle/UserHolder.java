@@ -7,13 +7,14 @@ import org.springframework.context.EnvironmentAware;
 import org.springframework.core.env.Environment;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 /**
  * @Author Constant
  * @Date 2021/7/12 23:52
  * @Description TODO
  **/
-public class UserHolder implements InitializingBean, BeanNameAware, BeanClassLoaderAware, BeanFactoryAware, EnvironmentAware {
+public class UserHolder implements InitializingBean, BeanNameAware, BeanClassLoaderAware, BeanFactoryAware, EnvironmentAware, SmartInitializingSingleton, DisposableBean {
     private final User user;
 
     private Integer number;
@@ -65,6 +66,24 @@ public class UserHolder implements InitializingBean, BeanNameAware, BeanClassLoa
         System.out.println("init-method() = " + description);
     }
 
+    @PreDestroy
+    public void preDestroy() {
+        this.description = "this is user holder v10";
+        System.out.println("preDestroy() = " + description);
+    }
+
+
+    @Override
+    public void destroy() throws Exception {
+        this.description = "this is user holder v11";
+        System.out.println("destroy() = " + description);
+    }
+
+    public void doDestroy() {
+        this.description = "this is user holder v12";
+        System.out.println("doDestroy() = " + description);
+    }
+
     @Override
     public void setBeanClassLoader(ClassLoader classLoader) {
         this.classLoader = classLoader;
@@ -87,6 +106,12 @@ public class UserHolder implements InitializingBean, BeanNameAware, BeanClassLoa
     }
 
     @Override
+    public void afterSingletonsInstantiated() {
+        this.description = "this is user holder v8";
+        System.out.println("afterSingletonsInstantiated = " + this.description);
+    }
+
+    @Override
     public String toString() {
         return "UserHolder{" +
                 "user=" + user +
@@ -94,5 +119,10 @@ public class UserHolder implements InitializingBean, BeanNameAware, BeanClassLoa
                 ", description='" + description + '\'' +
                 ", beanName='" + beanName + '\'' +
                 '}';
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        System.out.println("userHolder被回收");
     }
 }

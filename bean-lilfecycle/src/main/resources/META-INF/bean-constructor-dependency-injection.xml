@@ -10,7 +10,7 @@
         https://www.springframework.org/schema/beans/spring-context.xsd">
     <bean class="org.example.thinking.in.spring.bean.lificycle.MyInstantiationAwareBeanPostProcessor"/>
 
-    <bean id="userHolder" class="org.example.thinking.in.spring.bean.lificycle.UserHolder" autowire="constructor" init-method="init">
+    <bean id="userHolder" class="org.example.thinking.in.spring.bean.lificycle.UserHolder" autowire="constructor" init-method="init" destroy-method="doDestroy">
         <property name="number" value="1"/>
         <property name="description" value="this is user holder"/>
     </bean>
