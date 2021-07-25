@@ -1,7 +1,9 @@
 package org.example.thinking.in.spring.ioc.overview.enums;
 
 public enum City {
-    SHENZHENG,
+    SHENZHEN,
     BEIJING,
-    GUANGZHOU
+    GUANGZHOU,
+    SHANGHAI,
+    HANGZHOU
 }

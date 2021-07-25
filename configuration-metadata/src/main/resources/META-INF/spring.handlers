@@ -1,0 +1,2 @@
+## 定义映射关系
+http\://time.geekbang.org/schema/users=org.example.thinking.in.spring.configuration.metadata.UsersNamespaceHandler
